@@ -1,4 +1,5 @@
 #include "AudioSystem.h" 
+#include "Core/Logger.h"
 #include <fmod.hpp> 
 
 namespace Skyers
@@ -21,24 +22,26 @@ namespace Skyers
 		m_fmodSystem->close();
 		m_fmodSystem->release();
 		 
-		// !! use range based for-loop to iterate through m_sounds, call release on each element 
-		// !! call clear() on m_sounds to remove all elements 
-		// !! call close() on the fmod system 
-		// !! call release() on the fmod system 
+	
 	}
 
 	void AudioSystem::Update()
 	{
-		// !! call update() on the fmod system 
 		m_fmodSystem->update();
 	}
 
 	void AudioSystem::AddAudio(const std::string& name, const std::string& filename)
 	{
-		if (m_sounds.find(name) == m_sounds.end()) // !! use find() on m_sounds to see if element exists, only set sound if it does not 
+		if (m_sounds.find(name) == m_sounds.end()) 
 		{
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+			
+			if (sound == nullptr)
+			{
+				LOG("Error creating sound %s", filename.c_str());
+			}
+
 			m_sounds[name] = sound;
 		}
 	}
@@ -46,6 +49,12 @@ namespace Skyers
 	void AudioSystem::PlayAudio(const std::string& name, bool loop)
 	{
 		auto iter = m_sounds.find(name);// !! use find() on m_sounds and return the iterator 
+
+		if (iter == m_sounds.end())
+		{
+			LOG("Error could not find sound %s", name.c_str());
+		}
+
 			if (iter != m_sounds.end()) // !! if iterator is not m_sounds.end() 
 			{
 

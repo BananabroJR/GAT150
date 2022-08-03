@@ -4,6 +4,7 @@
 
 int main()
 {
+
 	Skyers::InitializeMemory();
 
 	Skyers::SetFilePath("../Assets");
@@ -27,12 +28,7 @@ int main()
 		Skyers::g_inputSystem.Update();
 		Skyers::g_audio.Update();
 
-		//cout << Skyers::g_time.deltaTime << endl;
-
-		//Skyers::g_audio.PlayAudio("song", true);
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
-
-		
 
 		// render
 		Skyers::g_renderer.BeginFrame();
