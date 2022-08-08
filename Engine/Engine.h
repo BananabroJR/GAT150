@@ -20,6 +20,9 @@
 #include "Renderer/Model.h"
 #include "Renderer/Text.h"
 
+#include "Componet/PlayerComponet.h"
+#include "Componet/SpriteComponet.h"
+
 
 #include <memory>
 #include <vector>

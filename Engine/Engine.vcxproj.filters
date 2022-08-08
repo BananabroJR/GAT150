@@ -27,6 +27,9 @@
     <Filter Include="Source\Audio">
       <UniqueIdentifier>{f2e2c8a0-0009-4a06-b121-2d37d1835d8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Componet">
+      <UniqueIdentifier>{bfc70dd2-a6ad-4b04-94a1-178df59537aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -73,6 +76,18 @@
     </ClCompile>
     <ClCompile Include="Core\Logger.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector2.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Componet\PlayerComponet.cpp">
+      <Filter>Source\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Componet\SpriteComponet.cpp">
+      <Filter>Source\Componet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +153,18 @@
     </ClInclude>
     <ClInclude Include="Core\Logger.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Componet.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\PlayerComponet.h">
+      <Filter>Source\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\RenderComponet.h">
+      <Filter>Source\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\SpriteComponet.h">
+      <Filter>Source\Componet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

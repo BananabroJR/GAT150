@@ -12,9 +12,9 @@ namespace Skyers
 		m_radius = CaculateRadius();
 	}
 
-	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, float scale)
+	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale)
 	{
-		// draw model points
+	
 		for (size_t i = 0; i < m_points.size() - 1; i++)
 		{
 			Skyers::Vector2 p1 = Vector2::Rotate((m_points[i] * scale), angle) + position;
@@ -35,10 +35,7 @@ namespace Skyers
 		std::istringstream stream(buffer);
 		stream >> m_color;
 
-		//m_color.r = 255;
-		//m_color.g = 255;
-		//m_color.b = 255;
-		//m_color.a = 255;
+		
 
 		
 		std::string line;

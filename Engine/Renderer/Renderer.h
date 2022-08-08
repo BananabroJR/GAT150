@@ -8,6 +8,9 @@ struct SDL_Window;
 
 namespace Skyers
 {
+	struct Transform;
+	class Texture;
+
 	class Renderer
 	{
 	public:
@@ -25,13 +28,16 @@ namespace Skyers
 		void DrawLine(float x1, float y1, float x2, float y2);
 		void DrawLine(const Vector2& v1, const Vector2& v2, const Color& color);
 		void DrawPoint(float x, float y);
-		void DrawPoint(const Vector2& v, const Color& color); 
+		void DrawPoint(const Vector2& v, const Color& color);
 
 		int GetWidth() { return m_width; }
 		int GetHeight() { return m_height; }
 
-		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0);
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0, const Vector2& scale = Vector2{ 1,1 }, const Vector2& registration = Vector2{ 0.5f,0.5f });
+		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f,0.5f });
 
+		friend class Text;
+		friend class Texture;
 	private:
 		int m_width = 0;
 		int m_height = 0;
@@ -41,7 +47,5 @@ namespace Skyers
 		SDL_Renderer* m_renderer = nullptr;
 		SDL_Window* m_window = nullptr;
 		
-		friend class Text;
-		friend class Texture;
 	};
 }

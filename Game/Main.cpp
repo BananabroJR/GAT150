@@ -2,8 +2,13 @@
 #include <iostream>
 
 
+
 int main()
 {
+
+	std::cout << __FILE__ << std::endl;
+	std::cout << __LINE__ << std::endl;
+	std::cout << __FUNCTION__ << std::endl;
 
 	Skyers::InitializeMemory();
 
@@ -19,6 +24,25 @@ int main()
 	std::shared_ptr<Skyers::Texture> texture = std::make_shared<Skyers::Texture>();
 	texture->Create(Skyers::g_renderer, "Sprites/Ryu-Neutral.png");
 
+	//create actors
+	Skyers::Scene scene;
+
+
+	Skyers::Transform transform{ {100,100},90,{3,3 } };
+	std::unique_ptr<Skyers::Actor> actor = std::make_unique<Skyers::Actor>(transform);
+
+	std::unique_ptr<Skyers::PlayerComponet> pComponet = std::make_unique<Skyers::PlayerComponet>();
+	actor->AddComponet(std::move(pComponet));
+
+	std::unique_ptr<Skyers::SpriteComponet> sComponet = std::make_unique<Skyers::SpriteComponet>();
+	sComponet->m_texture = texture;
+	actor->AddComponet(std::move(sComponet));
+
+
+	scene.Add(std::move(actor));
+
+	float angle = 0;
+
 	bool quit = false;
 
 	while (!quit)
@@ -30,9 +54,13 @@ int main()
 
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 
+		angle += 180.0f * Skyers::g_time.deltaTime;
+		scene.Update();
+
 		// render
 		Skyers::g_renderer.BeginFrame();
-		Skyers::g_renderer.Draw(texture, { 400, 300 }, 0);
+		scene.Draw(Skyers::g_renderer);
+		Skyers::g_renderer.Draw(texture, { 400, 300 }, angle,{2,2},{0.5f,0.5f});
 		Skyers::g_renderer.EndFrame();
 	}
 	Skyers::g_audio.Shutdown();

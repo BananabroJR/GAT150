@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+#include <iostream>
+#include <string>
 
 namespace Skyers
 {
@@ -9,18 +11,15 @@ namespace Skyers
 		uint8_t g;
 		uint8_t b;
 		uint8_t a;
+
+		static const Color white;
+		static const Color black;
+		static const Color red;
+		static const Color green;
+		static const Color blue;
+		static const Color yellow;
 	};
 
-	inline std::istream& operator >> (std::istream& stream, Color& color)
-	{
-		std::string line;
-		std::getline(stream, line);
+	std::istream& operator >> (std::istream& stream, Color& color);
 
-		color.r = 255;
-		color.g = 255;
-		color.b = 255;
-		color.a = 255;
-
-		return stream;
-	}
 }

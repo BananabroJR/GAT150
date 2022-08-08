@@ -15,18 +15,16 @@ namespace Skyers
 		// !! if m_ttfFont not null, close font (TTF_CloseFont)
 		if (m_ttfFont != nullptr)
 		{
-			TTF_CloseFont;
+			TTF_CloseFont(m_ttfFont);
 		}
 	}
 
 	void Font::Load(const std::string& filename, int fontSize)
 	{
 
-		filename.c_str();
+		;
 		
-	 	auto fontName = TTF_OpenFont("../Assets/Fonts/Cat.ttf", 23);
-		m_ttfFont = fontName;
-		
+		m_ttfFont = TTF_OpenFont(filename.c_str(), 23);
 		
 		// !! call TTF_OpenFont  
 		// !! use filename.c_str() to get the c-style string 
