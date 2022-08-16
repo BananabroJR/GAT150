@@ -1,6 +1,6 @@
-#pragma once
 #pragma once 
-#include "..\Math\Vector2.h" 
+#include "Math/Vector2.h" 
+#include "Recource/Resource.h"
 #include <string> 
 
 // !! forward declaration for SDL pointers below (SDL likes to use structs) 
@@ -12,11 +12,13 @@ namespace Skyers
 	// !! forward declaration for Renderer below
 	class Renderer;
 
-	class Texture
+	class Texture : public Resource
 	{
 	public:
 		Texture() = default;
 		~Texture();
+
+		bool Create(const std::string& filename, void* data = nullptr) override;
 
 		bool Create(Renderer& renderer, const std::string& filename);
 

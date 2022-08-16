@@ -15,6 +15,16 @@ namespace Skyers
         }
     }
 
+    bool Texture::Create(const std::string& filename, void* data)
+    {
+
+        //check data != null
+
+         Renderer* renderer = static_cast<Renderer*>(data);
+
+        return Create(*renderer, filename);
+    }
+
     bool Texture::Create(Renderer& renderer, const std::string& filename)
     {
         // load surface 

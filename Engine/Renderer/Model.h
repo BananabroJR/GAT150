@@ -1,12 +1,14 @@
 #pragma once
 #include "Renderer.h"
 #include "Math/Vector2.h"
+#include"Recource/Resource.h"
 #include <vector>
 #include <string>
 
+
 namespace Skyers
 {
-	class Model
+	class Model : public Resource
 	{
 	public:
 		Model() = default;
@@ -18,9 +20,12 @@ namespace Skyers
 		
 		Model(const std::string& filename);
 
-		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale = Vector2{1,1});
+		bool Create(const std::string& filename, void* data) override;
 
-		void Load(const std::string& filename);
+		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale = Vector2{1,1});
+		void Draw(Renderer& renderer, const Transform& transform);
+
+		bool Load(const std::string& filename);
 
 		float CaculateRadius();
 

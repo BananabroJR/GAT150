@@ -1,5 +1,5 @@
 #pragma once
-#include"..\Renderer\Renderer.h"
+#include"Renderer\Renderer.h"
 #include<list>
 #include <memory>
 

@@ -8,7 +8,10 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
-#include "Framework/Actor.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
+
+#include "Recource/ResourceManager.h"
 
 #include "Audio/AudioSystem.h"
 
@@ -18,15 +21,17 @@
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 #include "Renderer/Model.h"
-#include "Renderer/Text.h"
+#include "Renderer/Texture.h"
 
 #include "Componet/PlayerComponet.h"
 #include "Componet/SpriteComponet.h"
+#include "Componet/AudioComponet.h"
+#include "Componet/PhysicsComponet.h"
+#include "Componet/ModelComponet.h"
 
 
 #include <memory>
-#include <vector>
-#include <list>
+
 
 namespace Skyers
 {
@@ -34,4 +39,11 @@ namespace Skyers
 	extern AudioSystem g_audio;
 	extern InputSystem g_inputSystem;
 	extern Time g_time;
+	extern ResourceManager g_resource;
+
+	class Engine : Singleton<Engine>
+	{
+	public:
+		void Register();
+	};
 }

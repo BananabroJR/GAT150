@@ -19,6 +19,11 @@ namespace Skyers
 		}
 	}
 
+	bool Font::Create(const std::string& filename, void* data)
+	{
+		return false;
+	}
+
 	void Font::Load(const std::string& filename, int fontSize)
 	{
 

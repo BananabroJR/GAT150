@@ -1,4 +1,5 @@
 #include "File.h"
+#include "Logger.h"
 #include <filesystem>
 #include <fstream>
 
@@ -21,7 +22,12 @@ namespace Skyers
 
 	bool GetFileSize(const std::string& pathname, size_t& size)
 	{
-		if (!FileExists(pathname)) return false;
+		if (!FileExists(pathname))
+		{
+			LOG("Error could not not read file %s", pathname.c_str());
+			return false;
+
+		}
 
 		size = std::filesystem::file_size(pathname);
 

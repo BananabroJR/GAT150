@@ -21,9 +21,14 @@ namespace Skyers
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
+
+		void AddChild(std::unique_ptr<Actor> child);
+
 		virtual void OnCollison(Actor* other) {}
 
 		void AddComponet(std::unique_ptr<Componet> componet);
+		template<typename T>
+		T* GetComponet();
 
 		float GetRadius() { return 0; }// m_model.GetRadius();
 	
@@ -42,5 +47,19 @@ namespace Skyers
 
 		Scene* m_scene = nullptr;
 		std::vector<std::unique_ptr<Componet>> m_components;
+		std::vector<std::unique_ptr<Actor>> m_children;
+		Actor* m_parent = nullptr;
 	};
+	template<typename T>
+	inline T* Actor::GetComponet()
+	{
+		for (auto& componet : m_components)
+		{
+			T* result = dynamic_cast<T*>(componet.get());
+			if (result) return result;
+		}
+
+		return nullptr;
+	}
+
 }

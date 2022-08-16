@@ -30,6 +30,9 @@
     <Filter Include="Source\Componet">
       <UniqueIdentifier>{bfc70dd2-a6ad-4b04-94a1-178df59537aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Resource">
+      <UniqueIdentifier>{d729575d-e978-4500-ac48-7bdd73a1b2ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -88,6 +91,24 @@
     </ClCompile>
     <ClCompile Include="Componet\SpriteComponet.cpp">
       <Filter>Source\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Componet\AudioComponet.cpp">
+      <Filter>Source\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Componet\PhysicsComponet.cpp">
+      <Filter>Source\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix2x2.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix3x3.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Componet\ModelComponet.cpp">
+      <Filter>Source\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Recource\ResourceManager.cpp">
+      <Filter>Source\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,10 +187,45 @@
     <ClInclude Include="Componet\SpriteComponet.h">
       <Filter>Source\Componet</Filter>
     </ClInclude>
+    <ClInclude Include="Componet\AudioComponet.h">
+      <Filter>Source\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\PhysicsComponet.h">
+      <Filter>Source\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix2x2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix3x3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\ModelComponet.h">
+      <Filter>Source\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Recource\Resource.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Recource\ResourceManager.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Singleton.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Factory.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Build\Assets\Sprites\Ryu.png">
       <Filter>Resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Build\Assets\level.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>
