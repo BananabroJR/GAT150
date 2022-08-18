@@ -5,12 +5,20 @@
 namespace Skyers
 {
 
-	void SpriteComponet::Update()
+	void SpriteComponent::Update()
 	{
 	}
 
-	void SpriteComponet::Draw(Renderer& renderer)
+	void SpriteComponent::Draw(Renderer& renderer)
 	{
 		renderer.Draw(m_texture, m_owner->m_transform);
+	}
+	bool SpriteComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+	bool SpriteComponent::Read(const rapidjson::Value& value)
+	{
+		return false;
 	}
 }

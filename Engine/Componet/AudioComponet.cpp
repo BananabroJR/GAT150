@@ -1,20 +1,30 @@
-#include "AudioComponet.h"
+#include "AudioComponent.h"
 #include "Engine.h"
 
 namespace Skyers
 {
 
-	void AudioComponet::Update()
+	void AudioComponent::Update()
 	{
 	}
 
-	void AudioComponet::play()
+	void AudioComponent::play()
 	{
 		Skyers::g_audio.PlayAudio(m_soundName, m_loop);
 	}
 
-	void AudioComponet::stop()
+	void AudioComponent::stop()
 	{
+	}
+
+	bool AudioComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+
+	bool AudioComponent::Read(const rapidjson::Value& value)
+	{
+		return false;
 	}
 
 }

@@ -1,5 +1,7 @@
 #include "Scene.h"
 #include "Actor.h"
+#include "Factory.h"
+
 #include <algorithm>
 
 
@@ -37,8 +39,8 @@ namespace Skyers
 
 				if (distance < radius) //aka if there is a collison
 				{
-					(*itor1)->OnCollison((*itor2).get());
-					(*itor2)->OnCollison((*itor1).get());
+					(*itor1)->OnCollision((*itor2).get());
+					(*itor2)->OnCollision((*itor1).get());
 				}
 			}
 		}
@@ -56,6 +58,38 @@ namespace Skyers
 	{
 		actor->m_scene = this;
 		m_actors.push_back(std::move(actor));
+	}
+
+	bool Scene::Write(const rapidjson::Value& value) const
+	{
+
+		return true;
+	}
+
+	bool Scene::Read(const rapidjson::Value& value)
+	{
+		if (!value.HasMember("actors") && !value["actors"].IsArray())
+		{
+			return false;
+		}
+
+		//read actors
+		for (auto& actorValue : value["actors"].GetArray())
+		{
+			std::string type;
+			READ_DATA(actorValue, type);
+
+			auto actor = Factory::Instance().Create<Actor>(type);
+			if (actor)
+			{
+				// read actor
+				actor->Read(actorValue);
+				Add(std::move(actor));
+			}
+			
+		}
+
+		return true;
 	}
 
 }

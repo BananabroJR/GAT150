@@ -27,11 +27,14 @@
     <Filter Include="Source\Audio">
       <UniqueIdentifier>{f2e2c8a0-0009-4a06-b121-2d37d1835d8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Componet">
-      <UniqueIdentifier>{bfc70dd2-a6ad-4b04-94a1-178df59537aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Resource">
       <UniqueIdentifier>{d729575d-e978-4500-ac48-7bdd73a1b2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Serialization">
+      <UniqueIdentifier>{fc9d5d40-7a3a-4a55-9e6f-d02e25edeffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Component">
+      <UniqueIdentifier>{bfc70dd2-a6ad-4b04-94a1-178df59537aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,16 +90,16 @@
       <Filter>Source\Math</Filter>
     </ClCompile>
     <ClCompile Include="Componet\PlayerComponet.cpp">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Componet\SpriteComponet.cpp">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Componet\AudioComponet.cpp">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Componet\PhysicsComponet.cpp">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Math\Matrix2x2.cpp">
       <Filter>Source\Math</Filter>
@@ -105,10 +108,16 @@
       <Filter>Source\Math</Filter>
     </ClCompile>
     <ClCompile Include="Componet\ModelComponet.cpp">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Recource\ResourceManager.cpp">
       <Filter>Source\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialization\Json.cpp">
+      <Filter>Source\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Transform.cpp">
+      <Filter>Source\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,23 +184,20 @@
     <ClInclude Include="Core\Logger.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Componet.h">
+    <ClInclude Include="Framework\Component.h">
       <Filter>Source\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Componet\PlayerComponet.h">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Componet\RenderComponet.h">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Componet\SpriteComponet.h">
-      <Filter>Source\Componet</Filter>
-    </ClInclude>
-    <ClInclude Include="Componet\AudioComponet.h">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Componet\PhysicsComponet.h">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Math\Matrix2x2.h">
       <Filter>Source\Math</Filter>
@@ -203,7 +209,7 @@
       <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="Componet\ModelComponet.h">
-      <Filter>Source\Componet</Filter>
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Recource\Resource.h">
       <Filter>Source\Resource</Filter>
@@ -216,6 +222,15 @@
     </ClInclude>
     <ClInclude Include="Framework\Factory.h">
       <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization\Json.h">
+      <Filter>Source\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization\Serializable.h">
+      <Filter>Source\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\AudioComponent.h">
+      <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

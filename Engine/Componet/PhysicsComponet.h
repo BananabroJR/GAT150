@@ -1,13 +1,13 @@
 #pragma once
-#include "Framework/Componet.h"
+#include "Framework/Component.h"
 #include "Math/Vector2.h"
 
 namespace Skyers
 {
-	class PhysiscsComponet : public Componet
+	class PhysiscsComponent : public Component
 	{
 	public:
-		PhysiscsComponet() = default;
+		PhysiscsComponent() = default;
 
 		void Update() override;
 		void ApplyForce(Vector2& force) { m_acceloration += force; }
@@ -16,6 +16,10 @@ namespace Skyers
 		Vector2 m_acceloration;
 
 		float m_damping = 1;
+
+		// Inherited via Component
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 	};
 
 }

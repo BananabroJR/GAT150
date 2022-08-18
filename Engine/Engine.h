@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Serialization/Json.h"
+
 #include "Core/Memory.h"
 #include "Core/File.h"
 #include "Core/Time.h"
@@ -23,11 +26,12 @@
 #include "Renderer/Model.h"
 #include "Renderer/Texture.h"
 
+
+#include "Componet/AudioComponent.h"
+#include "Componet/ModelComponet.h"
 #include "Componet/PlayerComponet.h"
 #include "Componet/SpriteComponet.h"
-#include "Componet/AudioComponet.h"
 #include "Componet/PhysicsComponet.h"
-#include "Componet/ModelComponet.h"
 
 
 #include <memory>
@@ -41,7 +45,7 @@ namespace Skyers
 	extern Time g_time;
 	extern ResourceManager g_resource;
 
-	class Engine : Singleton<Engine>
+	class Engine : public Singleton<Engine>
 	{
 	public:
 		void Register();

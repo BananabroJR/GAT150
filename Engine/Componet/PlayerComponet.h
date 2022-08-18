@@ -1,13 +1,18 @@
 #pragma once
-#include "Framework/Componet.h"
+#include "Framework/Component.h"
 
 namespace Skyers
 {
-	class PlayerComponet : public Componet
+	class PlayerComponent : public Component
 	{
 	public:
-		PlayerComponet() = default;
-
+		PlayerComponent() = default;
 		void Update() override;
+
+		// Inherited via Component
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
+		float speed = 0;
 	};
 }

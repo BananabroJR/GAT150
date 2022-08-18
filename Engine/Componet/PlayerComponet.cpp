@@ -2,46 +2,58 @@
 #include "Engine.h"
 #include <iostream>
 
-namespace Skyers
+void Skyers::PlayerComponent::Update()
 {
-	void PlayerComponet::Update()
+	Vector2 direction = Vector2::zero;
+	//update transform with input
+	if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
 	{
-		//add in schmovement
-		Vector2 direction = Vector2::zero;
-		if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
-		{
-			m_owner->m_transform.rotation -= 180 * g_time.deltaTime;
-		}
-		if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
-		{
-			m_owner->m_transform.rotation += 180 * g_time.deltaTime;
-		}
+		m_owner->m_transform.rotation -= 180 * g_time.deltaTime;
+		//direction = Vector2::left;
+	}
+	if (g_inputSystem.GetKeyState(key_down) == InputSystem::KeyState::Held)
+	{
+		m_owner->m_transform.rotation += 180 * g_time.deltaTime;
+		//direction = Vector2::right;
+	}
+	float  thrust = 0;
+	if (g_inputSystem.GetKeyState(key_up) == InputSystem::KeyState::Held)
+	{
+		thrust = speed;
+	}
+	auto component = m_owner->GetComponent<PhysiscsComponent>();
+	if (component)
+	{
+		Vector2 force = Vector2::Rotate({ 1, 0 }, math::DegToRad(m_owner->m_transform.rotation)) * thrust;
+		component->ApplyForce(force);
 
-		float thrust = 0;
-		if (g_inputSystem.GetKeyState(key_up) == InputSystem::KeyState::Held)
-		{
-			thrust = 100;
-		}
-
-		auto component = m_owner->GetComponet<PhysiscsComponet>();
-		if (component)
-		{
-			
-			Vector2 force = Vector2::Rotate({1,0}, math::DegToRad(m_owner->m_transform.rotation)) * thrust;
-			component->ApplyForce(force);
-
-			force = (Vector2{ 200,100 } - m_owner->m_transform.position).Normalized() * 100.0f;
-			component->ApplyForce(force);
-		}
-
-		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Held)
-		{
-			auto componet = m_owner->GetComponet<AudioComponet>();
-			if (componet)
-			{
-				componet->play();
-			}
-		}
+		//gravitational force
+		force = (Vector2{ 400, 300 } - m_owner->m_transform.position).Normalized() * 60.0f;
+		component->ApplyForce(force);
 	}
 
+	
+
+	m_owner->m_transform.position += direction * 300 * g_time.deltaTime;
+
+	if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+	{
+		auto component = m_owner->GetComponent<AudioComponent>();
+		if (component)
+		{
+			component->play();
+		}
+	}
+}
+
+bool Skyers::PlayerComponent::Write(const rapidjson::Value& value) const
+{
+	return true;
+}
+
+bool Skyers::PlayerComponent::Read(const rapidjson::Value& value)
+{
+	READ_DATA(value, speed);
+
+	return true;
 }

@@ -1,14 +1,15 @@
 #pragma once
 #include "GameObject.h"
+#include "Framework/Actor.h"
 
 namespace Skyers
 {
 	class Actor;
 
-	class Componet : public GameObject
+	class Component : public GameObject, public ISerializable
 	{
 	public:
-		Componet() = default;
+		Component() = default;
 
 		virtual void Update() = 0;
 

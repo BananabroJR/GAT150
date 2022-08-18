@@ -1,11 +1,11 @@
 #pragma once
-#include "Framework/Componet.h"
+#include "Framework/Component.h"
 
 namespace Skyers
 {
 	class Renderer;
 
-	class RenderComponet : public Componet
+	class RenderComponent : public Component
 	{
 	public:
 		virtual void Draw(Renderer& renderer) = 0;

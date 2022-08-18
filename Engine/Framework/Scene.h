@@ -1,5 +1,8 @@
 #pragma once
 #include"Renderer\Renderer.h"
+#include "Serialization/Json.h"
+#include "Serialization/Serializable.h"
+
 #include<list>
 #include <memory>
 
@@ -11,7 +14,7 @@ namespace Skyers
 	class Rendnerer;
 	class Game;
 
-	class Scene
+	class Scene : public ISerializable
 	{
 	public:
 		Scene() = default;
@@ -23,6 +26,11 @@ namespace Skyers
 
 		void Add(std::unique_ptr<Actor> actor);
 
+		// Inherited via ISerializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+
+		virtual bool Read(const rapidjson::Value& value)override;
+
 		template<typename T>
 		T* GetActor();
 
@@ -31,6 +39,7 @@ namespace Skyers
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
 		Game* m_game;
+
 	};
 
 	template<typename T>

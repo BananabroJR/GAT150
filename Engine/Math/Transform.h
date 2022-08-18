@@ -3,10 +3,11 @@
 #include "Matrix2x2.h"
 #include "Matrix3x3.h"
 #include "MathUtils.h"
+#include "Serialization/Serializable.h"
 
 namespace Skyers
 {
-	struct Transform
+	struct Transform : public ISerializable
 	{
 		Vector2 position;
 		float rotation{ 0 };
@@ -14,10 +15,18 @@ namespace Skyers
 
 		Matrix3x3 matrix;
 
+		Transform() = default;
+		Transform(const Vector2& position, float rotation, const Vector2& scale) :
+			position{ position },
+			rotation{ rotation },
+			scale{ scale }
+		{}
+			
+
 		void Update()
 		{
 			Matrix3x3 mxScale = Matrix3x3::CreateScale(scale);
-			Matrix3x3 mxRotation = Matrix3x3::CreateRoatation(math::DegToRad(rotation));
+			Matrix3x3 mxRotation = Matrix3x3::CreateRotation(math::DegToRad(rotation));
 			Matrix3x3 mxTranslastion = Matrix3x3::CreateTranslation(position);
 
 			matrix = mxTranslastion * mxRotation * mxScale;
@@ -26,7 +35,7 @@ namespace Skyers
 		void Update(const Matrix3x3& parent)
 		{
 			Matrix3x3 mxScale = Matrix3x3::CreateScale(scale);
-			Matrix3x3 mxRotation = Matrix3x3::CreateRoatation(math::DegToRad(rotation));
+			Matrix3x3 mxRotation = Matrix3x3::CreateRotation(math::DegToRad(rotation));
 			Matrix3x3 mxTranslastion = Matrix3x3::CreateTranslation(position);
 
 			matrix = mxTranslastion * mxRotation * mxScale;
@@ -36,10 +45,14 @@ namespace Skyers
 		operator Matrix3x3 () const
 		{
 			Matrix3x3 mxScale = Matrix3x3::CreateScale(scale);
-			Matrix3x3 mxRotation = Matrix3x3::CreateRoatation(math::DegToRad(rotation));
+			Matrix3x3 mxRotation = Matrix3x3::CreateRotation(math::DegToRad(rotation));
 			Matrix3x3 mxTranslastion = Matrix3x3::CreateTranslation(position);
 
 			return { mxTranslastion * mxRotation * mxScale };
 		}
+
+		// Inherited via ISerializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 	};
 }
