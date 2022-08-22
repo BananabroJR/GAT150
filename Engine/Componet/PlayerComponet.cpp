@@ -1,4 +1,5 @@
 #include "PlayerComponet.h"
+#include "Framework/Actor.h"
 #include "Engine.h"
 #include <iostream>
 
@@ -21,15 +22,15 @@ void Skyers::PlayerComponent::Update()
 	{
 		thrust = speed;
 	}
-	auto component = m_owner->GetComponent<PhysiscsComponent>();
+	auto component = m_owner->GetComponent<PhysicsComponent>();
 	if (component)
 	{
 		Vector2 force = Vector2::Rotate({ 1, 0 }, math::DegToRad(m_owner->m_transform.rotation)) * thrust;
 		component->ApplyForce(force);
 
 		//gravitational force
-		force = (Vector2{ 400, 300 } - m_owner->m_transform.position).Normalized() * 60.0f;
-		component->ApplyForce(force);
+		//force = (Vector2{ 400, 300 } - m_owner->m_transform.position).Normalized() * 60.0f;
+		//component->ApplyForce(force);
 	}
 
 	
@@ -54,6 +55,7 @@ bool Skyers::PlayerComponent::Write(const rapidjson::Value& value) const
 bool Skyers::PlayerComponent::Read(const rapidjson::Value& value)
 {
 	READ_DATA(value, speed);
+	
 
 	return true;
 }

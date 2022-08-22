@@ -1,4 +1,5 @@
 #include "Font.h" 
+#include "Core/Logger.h"
 #include <SDL_ttf.h> 
 
 namespace Skyers
@@ -19,18 +20,30 @@ namespace Skyers
 		}
 	}
 
-	bool Font::Create(const std::string& filename, void* data)
+	bool Font::Create(const std::string filename, ...)
 	{
-		return false;
+		va_list args;
+		va_start(args, filename);
+		int fontSize = va_arg(args, int);
+
+		va_end(args);
+
+		return Load(filename,fontSize);
 	}
 
-	void Font::Load(const std::string& filename, int fontSize)
+	bool Font::Load(const std::string& filename, int fontSize)
 	{
 
-		;
 		
-		m_ttfFont = TTF_OpenFont(filename.c_str(), 23);
 		
+		m_ttfFont = TTF_OpenFont(filename.c_str(), fontSize);
+		if (m_ttfFont == nullptr)
+		{
+			LOG("Could not open font %s", filename.c_str());
+			return false;
+		}
+		return true;
+
 		// !! call TTF_OpenFont  
 		// !! use filename.c_str() to get the c-style string 
 		// !! assign the return value of TTF_OpenFont to m_ttfFont 

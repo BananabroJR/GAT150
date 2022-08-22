@@ -10,7 +10,7 @@ namespace Skyers
 
 	void ResourceManager::Shutdown()
 	{
-
+		m_resources.clear();
 	}
 }
 

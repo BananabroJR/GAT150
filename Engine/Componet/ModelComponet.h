@@ -1,10 +1,10 @@
 #pragma once
 #include "RenderComponet.h"
-#include "Renderer/Model.h"
+
 
 namespace Skyers
 {
-	class Texture;
+	class Model;
 	class ModelComponent : public RenderComponent
 	{
 	public:

@@ -1,24 +1,29 @@
 #include "PhysicsComponet.h"
+#include "Framework/Actor.h"
 #include "Engine.h"
 namespace Skyers
 {
-	void PhysiscsComponent::Update()
+	void PhysicsComponent::Update()
 	{
-		m_velocity += m_acceloration * g_time.deltaTime;
-		m_owner->m_transform.position += m_velocity * g_time.deltaTime;
-		m_velocity *= m_damping;
+		velocity += acceloration * g_time.deltaTime;
+		m_owner->m_transform.position += velocity * g_time.deltaTime;
+		velocity *= damping;
 
-		m_acceloration = Vector2::zero;
+		acceloration = Vector2::zero;
 	}
 
-	bool PhysiscsComponent::Write(const rapidjson::Value& value) const
+	bool PhysicsComponent::Write(const rapidjson::Value& value) const
 	{
 		return false;
 	}
 
-	bool PhysiscsComponent::Read(const rapidjson::Value& value)
+	bool PhysicsComponent::Read(const rapidjson::Value& value)
 	{
-		return false;
+		READ_DATA(value, damping);
+		READ_DATA(value, velocity);
+		READ_DATA(value, acceloration);
+
+		return true;
 	}
 
 

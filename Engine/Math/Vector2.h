@@ -2,6 +2,7 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include <ostream>
 
 namespace Skyers
 {
@@ -18,7 +19,7 @@ namespace Skyers
 		float operator [] (size_t index) const { return (&x)[index]; }
 		float& operator [] (size_t index) { return (&x)[index]; }
 
-
+		
 		// arithmetic operators
 		// Vector2 = Vector2 + Vector2
 		Vector2 operator + (const Vector2& v) const { return Vector2{ this->x + v.x, this->y + v.y }; }
@@ -76,7 +77,11 @@ namespace Skyers
 	
 	std::istream& operator >> (std::istream& stream, Vector2& v);
 
-	inline float Vector2::LengthSqr() 
+	std::ostream& operator << (std::ostream& stream, const Vector2& v);
+
+	
+
+	inline float Vector2::LengthSqr()
 	{ 
 		return x * x + y * y; 
 	}

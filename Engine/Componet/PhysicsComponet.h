@@ -4,18 +4,18 @@
 
 namespace Skyers
 {
-	class PhysiscsComponent : public Component
+	class PhysicsComponent : public Component
 	{
 	public:
-		PhysiscsComponent() = default;
+		PhysicsComponent() = default;
 
 		void Update() override;
-		void ApplyForce(Vector2& force) { m_acceloration += force; }
+		void ApplyForce(Vector2& force) {acceloration += force; }
 
-		Vector2 m_velocity;
-		Vector2 m_acceloration;
+		Vector2 velocity;
+		Vector2 acceloration;
 
-		float m_damping = 1;
+		float damping = 1;
 
 		// Inherited via Component
 		virtual bool Write(const rapidjson::Value& value) const override;

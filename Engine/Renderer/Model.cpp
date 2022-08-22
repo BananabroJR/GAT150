@@ -3,6 +3,7 @@
 #include "Core/Logger.h"
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
+#include "Core/Logger.h"
 
 #include <iostream>
 #include <sstream>
@@ -15,15 +16,20 @@ namespace Skyers
 		m_radius = CaculateRadius();
 	}
 
-	bool Model::Create(const std::string& filename, void* data)
+	bool Model::Create(std::string filename, ...)
 	{
-		return false;
+		if (!Load(filename))
+		{
+			LOG("could not create model %s",filename.c_str());
+			return false;
+		}
+		return true;
 	}
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale)
 	{
 	
-		for (size_t i = 0; i < m_points.size() - 1; i++)
+		for (int i = 0; i < m_points.size() - 1; i++)
 		{
 			Skyers::Vector2 p1 = Vector2::Rotate((m_points[i] * scale), angle) + position;
 			Skyers::Vector2 p2 = Vector2::Rotate((m_points[i + 1] * scale), angle) + position;
@@ -37,7 +43,7 @@ namespace Skyers
 		Matrix3x3 mx = transform.matrix;
 		//if (m_points.size() == 0) return;
 
-		for (size_t i = 0; i < m_points.size() - 1; i++)
+		for (int i = 0; i < m_points.size() - 1; i++)
 		{
 
 			Skyers::Vector2 p1 = mx * m_points[i];

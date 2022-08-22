@@ -6,7 +6,7 @@ namespace Skyers
 	class Resource
 	{
 	public:
-		virtual bool Create(const std:: string& filename, void* data = nullptr) = 0;
+		virtual bool Create(std:: string filename, ...) = 0;
 
 	};
 }

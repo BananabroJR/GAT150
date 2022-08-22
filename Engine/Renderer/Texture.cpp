@@ -15,14 +15,16 @@ namespace Skyers
         }
     }
 
-    bool Texture::Create(const std::string& filename, void* data)
+    bool Texture::Create(std::string filename, ...)
     {
+        va_list args;
+        va_start(args, filename);
+        Renderer& renderer = va_arg(args, Renderer);
+        va_end(args);
+       
 
-        //check data != null
 
-         Renderer* renderer = static_cast<Renderer*>(data);
-
-        return Create(*renderer, filename);
+        return Create(renderer, filename);
     }
 
     bool Texture::Create(Renderer& renderer, const std::string& filename)
@@ -32,6 +34,7 @@ namespace Skyers
         if (surface == nullptr)
         {
             LOG(SDL_GetError());
+            return false;
         }
 
         // create texture 

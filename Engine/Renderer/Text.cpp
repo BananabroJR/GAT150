@@ -11,7 +11,7 @@ namespace Skyers
         // !! if m_texture not null, destroy texture (SDL_DestroyTexture) 
         if (m_texture != nullptr)
         {
-            SDL_DestroyTexture;
+            SDL_DestroyTexture(m_texture);
         }
     }
 

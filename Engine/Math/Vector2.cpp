@@ -9,6 +9,7 @@ namespace Skyers
 	const Vector2 Vector2::left{ -1,0 };
 	const Vector2 Vector2::right{ 1,0 };
 
+
 	 std::istream& operator >> (std::istream& stream, Vector2& v)
 	{
 		std::string line;
@@ -23,4 +24,11 @@ namespace Skyers
 
 		return stream;
 	}
+
+	 std::ostream& operator<<(std::ostream& stream, const Vector2& v)
+	 {
+		 stream << v.x << " " << v.y;
+
+		 return stream;
+	 }
 }

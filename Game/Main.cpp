@@ -11,20 +11,15 @@ int main()
 	Skyers::SetFilePath("../Assets");
 
 	
+	
 
-//	int i1;
-//	Skyers::json::Get(document, "integer1", i1);
-//	std::cout << i1 << std::endl;
-
-//	int i2;
-//	Skyers::json::Get(document, "integer2", i2);
-//	std::cout << i2 << std::endl;
 	
 
 	Skyers::g_renderer.Initialize();
 	Skyers::g_inputSystem.Initialize();
 	Skyers::g_audio.Initialize();
 	Skyers::g_resource.Initialize();
+	Skyers::g_physics.Initialize();
 	Skyers::Engine::Instance().Register();
 
 	Skyers::g_renderer.CreateWindow("Neumont", 800, 600);
@@ -32,11 +27,11 @@ int main()
 
 	Skyers::Scene scene;
 
-	//move these two lines up above and uncomment the commented out code for json assingment.
-	rapidjson::Document document; 
-	bool success = Skyers::json::Load("level.txt", document); //change "level.txt" back to "json.txt" for the assingment 
 
-	scene.Read(document); //comment this out for json assingment
+	
+	rapidjson::Document document; 
+	bool success = Skyers::json::Load("level.txt", document); 
+	scene.Read(document);
 
 
 	bool quit = false;
@@ -50,9 +45,10 @@ int main()
 
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 
-
+		Skyers::g_physics.Update();
 		scene.Update();
 
+		Skyers::g_renderer.BeginFrame();
 		// render
 
 		scene.Draw(Skyers::g_renderer);

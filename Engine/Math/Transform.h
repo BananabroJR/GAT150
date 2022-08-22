@@ -15,12 +15,12 @@ namespace Skyers
 
 		Matrix3x3 matrix;
 
-		Transform() = default;
-		Transform(const Vector2& position, float rotation, const Vector2& scale) :
-			position{ position },
-			rotation{ rotation },
-			scale{ scale }
-		{}
+	//	Transform() = default;
+		//Transform(const Vector2& position, float rotation, const Vector2& scale) :
+		//	position{ position },
+		//	rotation{ rotation },
+		//	scale{ scale }
+		//{}
 			
 
 		void Update()

@@ -18,14 +18,14 @@ namespace Skyers
 		Texture() = default;
 		~Texture();
 
-		bool Create(const std::string& filename, void* data = nullptr) override;
+		bool Create(std::string filename, ...) override;
 
 		bool Create(Renderer& renderer, const std::string& filename);
 
 		Vector2 GetSize() const;
 
 		// !! allow Renderer to access private texture data (friend) 
-		friend Renderer;
+		friend class Renderer;
 	private:
 		SDL_Texture* m_texture = nullptr;
 	};

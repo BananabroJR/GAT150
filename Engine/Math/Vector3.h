@@ -13,7 +13,7 @@ namespace Skyers
 		Vector3() : x{ 0 }, y{ 0 }, z{0} {}
 		Vector3(float x, float y, float z) : x{ x }, y{ y }, z{ z } {}
 		Vector3(float v) : x{ v }, y{ v }, z{v} {}
-		Vector3(int x, int y) : x{ (float)x }, y{ (float)y }, z{(float)z} {}
+		Vector3(int x, int y,int z) : x{ (float)x }, y{ (float)y }, z{(float)z} {}
 
 		void Set(float x, float y) { this->x = x; this->y = y; this->z = z; }
 		float operator [] (size_t index) const { return (&x)[index]; }

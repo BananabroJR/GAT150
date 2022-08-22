@@ -1,5 +1,6 @@
 #include "Actor.h"
 #include "Factory.h"
+#include "Core/Logger.h"
 #include "Componet/RenderComponet.h"
 
 namespace Skyers
@@ -56,16 +57,18 @@ namespace Skyers
 
 		m_transform.Read(value["transform"]);
 
-		if (!value.HasMember("components") || !value["components"].IsArray()) {
-
-			for (auto& componentValue : value["components"].GetArray()) {
-				std::string type;
-				READ_DATA(componentValue, type);
-				auto component = Factory::Instance().Create<Component>(type);
-				if (component) {
-					component->Read(componentValue);
-					AddComponent(std::move(component));
-				}
+		if (!value.HasMember("components") || !value["components"].IsArray()) 
+		{
+			LOG("Component %s", name.c_str());
+		}
+		for (auto& componentValue : value["components"].GetArray()) 
+		{
+			std::string type;
+			READ_DATA(componentValue, type);
+			auto component = Factory::Instance().Create<Component>(type);
+			if (component) {
+				component->Read(componentValue);
+				AddComponent(std::move(component));
 			}
 		}
 		return true;

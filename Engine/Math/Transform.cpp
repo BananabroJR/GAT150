@@ -1,16 +1,21 @@
 #include "Transform.h"
 
-bool Skyers::Transform::Write(const rapidjson::Value& value) const
+namespace Skyers
 {
-    return true;
+    bool Transform::Write(const rapidjson::Value& value) const
+    {
+        return true;
+    }
+
+    bool Transform::Read(const rapidjson::Value& value)
+    {
+        READ_DATA(value, rotation); 
+        READ_DATA(value, position);
+        READ_DATA(value, scale);
+
+
+        return true;
+    }
+
 }
 
-bool Skyers::Transform::Read(const rapidjson::Value& value)
-{
-    READ_DATA(value, position);
-    READ_DATA(value, scale);
-    READ_DATA(value, rotation);
-
-
-    return true;
-}

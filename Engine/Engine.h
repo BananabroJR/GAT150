@@ -13,6 +13,7 @@
 #include "Framework/Game.h"
 #include "Framework/Singleton.h"
 #include "Framework/Factory.h"
+#include "Framework/Actor.h"
 
 #include "Recource/ResourceManager.h"
 
@@ -26,11 +27,13 @@
 #include "Renderer/Model.h"
 #include "Renderer/Texture.h"
 
+#include "Physics/PhysicsSystem.h"
 
 #include "Componet/AudioComponent.h"
 #include "Componet/ModelComponet.h"
 #include "Componet/PlayerComponet.h"
 #include "Componet/SpriteComponet.h"
+#include "Componet/SpriteAnimComponent.h"
 #include "Componet/PhysicsComponet.h"
 
 
@@ -44,6 +47,7 @@ namespace Skyers
 	extern InputSystem g_inputSystem;
 	extern Time g_time;
 	extern ResourceManager g_resource;
+	extern PhysicsSystem g_physics;
 
 	class Engine : public Singleton<Engine>
 	{

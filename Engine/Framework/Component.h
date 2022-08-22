@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Framework/Actor.h"
+
 
 namespace Skyers
 {
@@ -13,7 +13,7 @@ namespace Skyers
 
 		virtual void Update() = 0;
 
-		friend Actor;
+		friend class Actor;
 	protected:
 		Actor* m_owner = nullptr;
 	};
