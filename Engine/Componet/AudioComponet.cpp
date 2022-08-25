@@ -3,28 +3,49 @@
 
 namespace Skyers
 {
+	AudioComponent::~AudioComponent()
+	{
+		Stop();
+	}
+
+	void AudioComponent::Initialize()
+	{
+		if (playOnAwake)
+		{
+			Play();
+		}
+	}
 
 	void AudioComponent::Update()
 	{
 	}
 
-	void AudioComponent::play()
+	void AudioComponent::Play()
 	{
-		Skyers::g_audio.PlayAudio(m_soundName, m_loop);
+		m_channel.Stop();
+		m_channel = g_audio.PlayAudio(soundName, volume, pitch, loop);
 	}
 
-	void AudioComponent::stop()
+	void AudioComponent::Stop()
 	{
+		m_channel.Stop();
 	}
 
 	bool AudioComponent::Write(const rapidjson::Value& value) const
 	{
-		return false;
+		return true;
 	}
 
 	bool AudioComponent::Read(const rapidjson::Value& value)
 	{
-		return false;
+		READ_DATA(value, soundName);
+		READ_DATA(value, volume);
+		READ_DATA(value, pitch);
+		READ_DATA(value, loop);
+
+		g_audio.AddAudio(soundName, soundName);
+
+		return true;
 	}
 
 }

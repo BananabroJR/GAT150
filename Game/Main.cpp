@@ -10,11 +10,6 @@ int main()
 
 	Skyers::SetFilePath("../Assets");
 
-	
-	
-
-	
-
 	Skyers::g_renderer.Initialize();
 	Skyers::g_inputSystem.Initialize();
 	Skyers::g_audio.Initialize();
@@ -26,13 +21,12 @@ int main()
 	Skyers::g_renderer.SetClearColor(Skyers::Color{ 0, 0, 0, 255 });
 
 	Skyers::Scene scene;
-
-
 	
 	rapidjson::Document document; 
 	bool success = Skyers::json::Load("level.txt", document); 
-	scene.Read(document);
 
+	scene.Read(document);
+	scene.Initialize();
 
 	bool quit = false;
 
@@ -55,8 +49,10 @@ int main()
 	
 		Skyers::g_renderer.EndFrame();
 	}
+	scene.RemoveAll();
 	
-
+	Skyers::g_physics.Shutdown();
+	Skyers::g_resource.Shutdown();
 	Skyers::g_audio.Shutdown();
 	Skyers::g_renderer.Shutdown();
 	Skyers::g_inputSystem.Shutdown();

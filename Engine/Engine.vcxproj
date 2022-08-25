@@ -163,13 +163,17 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
     <ClCompile Include="Componet\AudioComponet.cpp" />
+    <ClCompile Include="Componet\CollisionComponenet.cpp" />
     <ClCompile Include="Componet\ModelComponet.cpp" />
     <ClCompile Include="Componet\PhysicsComponet.cpp" />
     <ClCompile Include="Componet\PlayerComponet.cpp" />
+    <ClCompile Include="Componet\RBPhysicsComponent.cpp" />
     <ClCompile Include="Componet\SpriteAnimComponent.cpp" />
     <ClCompile Include="Componet\SpriteComponet.cpp" />
+    <ClCompile Include="Componet\TextComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
     <ClCompile Include="Core\Logger.cpp" />
     <ClCompile Include="Core\Memory.cpp" />
@@ -184,6 +188,7 @@
     <ClCompile Include="Math\Matrix3x3.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Physics\ContactListener.cpp" />
     <ClCompile Include="Physics\PhysicsSystem.cpp" />
     <ClCompile Include="Recource\ResourceManager.cpp" />
     <ClCompile Include="Renderer\Font.cpp" />
@@ -194,14 +199,18 @@
     <ClCompile Include="Serialization\Json.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio\AudioChannel.h" />
     <ClInclude Include="Audio\AudioSystem.h" />
     <ClInclude Include="Componet\AudioComponent.h" />
+    <ClInclude Include="Componet\CollisionComponenet.h" />
     <ClInclude Include="Componet\ModelComponet.h" />
     <ClInclude Include="Componet\PhysicsComponet.h" />
     <ClInclude Include="Componet\PlayerComponet.h" />
+    <ClInclude Include="Componet\RBPhysicsComponent.h" />
     <ClInclude Include="Componet\RenderComponet.h" />
     <ClInclude Include="Componet\SpriteAnimComponent.h" />
     <ClInclude Include="Componet\SpriteComponet.h" />
+    <ClInclude Include="Componet\TextComponent.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Logger.h" />
     <ClInclude Include="Core\Memory.h" />
@@ -224,6 +233,8 @@
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Physics\Collision.h" />
+    <ClInclude Include="Physics\ContactListener.h" />
     <ClInclude Include="Physics\PhysicsSystem.h" />
     <ClInclude Include="Recource\Resource.h" />
     <ClInclude Include="Recource\ResourceManager.h" />
@@ -234,12 +245,6 @@
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="Serialization\Json.h" />
     <ClInclude Include="Serialization\Serializable.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Build\Assets\Sprites\Ryu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\Build\Assets\level.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

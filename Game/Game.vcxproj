@@ -150,6 +150,12 @@
       <Project>{f95bb3d2-294c-4338-850f-70e610258bef}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Build\Assets\Sprites\Ryu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Build\Assets\level.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

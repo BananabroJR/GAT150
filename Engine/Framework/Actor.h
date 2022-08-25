@@ -17,6 +17,9 @@ namespace Skyers
 		Actor() = default;
 		Actor(const Transform& transform) : m_transform{ transform } {}
 
+		std::unique_ptr<GameObject> Clone() { return std::make_unique<Actor>(); }
+
+		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
@@ -48,15 +51,16 @@ namespace Skyers
 		std::string tag;
 
 		bool m_destroy = false;
-		//physics
-		Vector2 m_velocity;
-		float m_damping = 1;
-
+		
 
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;
+
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;
+
+
+		// Inherited via GameObject
 
 	};
 

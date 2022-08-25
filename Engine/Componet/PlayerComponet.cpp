@@ -3,59 +3,78 @@
 #include "Engine.h"
 #include <iostream>
 
-void Skyers::PlayerComponent::Update()
+namespace Skyers
 {
-	Vector2 direction = Vector2::zero;
-	//update transform with input
-	if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
+	void PlayerComponent::Initialize()
 	{
-		m_owner->m_transform.rotation -= 180 * g_time.deltaTime;
-		//direction = Vector2::left;
-	}
-	if (g_inputSystem.GetKeyState(key_down) == InputSystem::KeyState::Held)
-	{
-		m_owner->m_transform.rotation += 180 * g_time.deltaTime;
-		//direction = Vector2::right;
-	}
-	float  thrust = 0;
-	if (g_inputSystem.GetKeyState(key_up) == InputSystem::KeyState::Held)
-	{
-		thrust = speed;
-	}
-	auto component = m_owner->GetComponent<PhysicsComponent>();
-	if (component)
-	{
-		Vector2 force = Vector2::Rotate({ 1, 0 }, math::DegToRad(m_owner->m_transform.rotation)) * thrust;
-		component->ApplyForce(force);
+		auto componenet = m_owner->GetComponent<CollisionComponent>();
 
-		//gravitational force
-		//force = (Vector2{ 400, 300 } - m_owner->m_transform.position).Normalized() * 60.0f;
-		//component->ApplyForce(force);
-	}
+		if (componenet)
+		{
+			componenet->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
+			componenet->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
+		}
 
+	}
+	void PlayerComponent::Update()
+	{
+		  Vector2 direction = Vector2::zero;
+		//update transform with input
+		if (g_inputSystem.GetKeyState(key_left) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::left;
+			//direction = Vector2::left;
+		}
+		if (g_inputSystem.GetKeyState(key_right) == InputSystem::KeyState::Held)
+		{
+			direction = Vector2::right;
+			//direction = Vector2::right;
+		}
 	
-
-	m_owner->m_transform.position += direction * 300 * g_time.deltaTime;
-
-	if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
-	{
-		auto component = m_owner->GetComponent<AudioComponent>();
+		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component)
 		{
-			component->play();
+		
+			component->ApplyForce(direction * speed);
+
+		
+		}
+	
+		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+		{
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			if (component)
+			{
+
+				component->ApplyForce(Vector2::up * 30);
+
+
+			}
 		}
 	}
-}
 
-bool Skyers::PlayerComponent::Write(const rapidjson::Value& value) const
-{
-	return true;
-}
+	bool PlayerComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
 
-bool Skyers::PlayerComponent::Read(const rapidjson::Value& value)
-{
-	READ_DATA(value, speed);
+	bool PlayerComponent::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, speed);
 	
 
-	return true;
+		return true;
+	}
+
+	void PlayerComponent::OnCollisionEnter(Actor* other)
+	{
+		std::cout << "player enter\n";
+	}
+
+	void PlayerComponent::OnCollisionExit(Actor* other)
+	{
+		std::cout << "player exit\n";
+	}
+
 }
+

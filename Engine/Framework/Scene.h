@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer/Renderer.h"
 #include "Engine.h"
+#include "Framework/GameObject.h"
 #include "Serialization/Json.h"
 #include "Serialization/Serializable.h"
 
@@ -15,17 +16,19 @@ namespace Skyers
 	class Rendnerer;
 	class Game;
 
-	class Scene : public ISerializable
+	class Scene : public GameObject, public ISerializable
 	{
 	public:
 		Scene() = default;
 		Scene(Game* game) : m_game { game} {}
 		~Scene() = default;
 
-		void Update();
+		void Update() override;
+		void Initialize() override;
 		void Draw(Renderer& renderer);
 
 		void Add(std::unique_ptr<Actor> actor);
+		void RemoveAll();
 
 		// Inherited via ISerializable
 		virtual bool Write(const rapidjson::Value& value) const override;

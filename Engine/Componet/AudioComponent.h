@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Audio/AudioChannel.h"
 
 namespace Skyers
 {
@@ -7,18 +8,25 @@ namespace Skyers
 	{
 	public:
 		AudioComponent() = default;
+		~AudioComponent();
 
+
+		void Initialize() override;	
 		void Update() override;
 
-		void play();
+		void Play();
 
-		void stop();
+		void Stop();
 
-		std::string m_soundName;
-		bool m_playOnAwake = false;
-		float m_volume = 1;
-		float m_pitch = 1;
-		bool m_loop = false;
+
+		AudioChannel m_channel;
+
+		std::string soundName;
+		bool playOnAwake = false;
+		float volume = 1;
+		float pitch = 1;
+		bool loop = false;
+				
 
 		// Inherited via Component
 		virtual bool Write(const rapidjson::Value& value) const override;

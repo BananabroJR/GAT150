@@ -1,4 +1,4 @@
-#include "Scene.h"
+ #include "Scene.h"
 #include "Actor.h"
 #include "Factory.h"
 
@@ -24,25 +24,13 @@ namespace Skyers
 		
 		}
 
-		//check collision
-		for (auto itor1 = m_actors.begin(); itor1 != m_actors.end(); itor1++ )
+	}
+
+	void Scene::Initialize()
+	{
+		for (auto& actor : m_actors)
 		{
-			for (auto itor2 = m_actors.begin(); itor2 != m_actors.end(); itor2++)
-			{
-				if (itor1 == itor2)
-				{
-					continue;
-				}
-
-				float radius = (*itor1)->GetRadius() + (*itor2)->GetRadius();
-				float distance = (*itor1)->m_transform.position.Distance((*itor2)->m_transform.position);
-
-				if (distance < radius) //aka if there is a collison
-				{
-					(*itor1)->OnCollision((*itor2).get());
-					(*itor2)->OnCollision((*itor1).get());
-				}
-			}
+			actor->Initialize();
 		}
 	}
 
@@ -58,6 +46,11 @@ namespace Skyers
 	{
 		actor->m_scene = this;
 		m_actors.push_back(std::move(actor));
+	}
+
+	void Scene::RemoveAll()
+	{
+		m_actors.clear();
 	}
 
 	bool Scene::Write(const rapidjson::Value& value) const

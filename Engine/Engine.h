@@ -35,6 +35,9 @@
 #include "Componet/SpriteComponet.h"
 #include "Componet/SpriteAnimComponent.h"
 #include "Componet/PhysicsComponet.h"
+#include "Componet/RBPhysicsComponent.h"
+#include "Componet/CollisionComponenet.h"
+#include "Componet/TextComponent.h"
 
 
 #include <memory>
