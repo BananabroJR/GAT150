@@ -11,6 +11,8 @@ namespace Skyers
 	public:
 		using functionPtr = std::function<void(Actor*)>;
 
+		CLASS_DECLARATION(CollisionComponent)
+
 
 		virtual void Initialize() override;
 		virtual void Update() override;

@@ -9,6 +9,9 @@ namespace Skyers
 	{
 	public:
 
+		CLASS_DECLARATION(ModelComponent)
+
+
 		// Inherited via RenderComponent
 		virtual void Update() override;
 

@@ -28,6 +28,16 @@ int main()
 	scene.Read(document);
 	scene.Initialize();
 
+	for (int i = 0; i < 10; i++)
+	{
+	auto actor = Skyers::Factory::Instance().Create<Skyers::Actor>("Coin");
+	actor->m_transform.position = { Skyers::randomf( 0,800.0f),100.0f };
+	actor->Initialize();
+
+	scene.Add(std::move(actor));
+
+	}
+
 	bool quit = false;
 
 	while (!quit)
@@ -50,6 +60,7 @@ int main()
 		Skyers::g_renderer.EndFrame();
 	}
 	scene.RemoveAll();
+	Skyers::Factory::Instance().Shutdown();
 	
 	Skyers::g_physics.Shutdown();
 	Skyers::g_resource.Shutdown();

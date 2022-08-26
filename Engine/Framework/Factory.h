@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "Core/Logger.h"
 #include <memory>
 #include<string>
 #include <map>
@@ -11,6 +12,7 @@ namespace Skyers
 	class CreatorBase
 	{
 	public:
+	 	virtual ~CreatorBase() = default;
 		virtual std::unique_ptr<GameObject> Create() = 0;
 	};
 
@@ -31,12 +33,14 @@ namespace Skyers
 	class PrefabCreator : public CreatorBase
 	{
 	public:
+		~PrefabCreator() = default;
+
 		PrefabCreator(std::unique_ptr<T> instance) : m_instance{ std::move(instance) } {}
 		// Inherited via CreatorBase
 
 		std::unique_ptr<GameObject> Create() override
 		{
-			return std::make_unique<T>();
+			return m_instance->Clone();
 
 		}
 
@@ -48,6 +52,8 @@ namespace Skyers
 	class Factory : public Singleton<Factory>
 	{
 	public:
+		void Shutdown() { m_registry.clear(); }
+
 		template <typename T>
 		void Register(const std::string& key);
 
@@ -71,7 +77,7 @@ namespace Skyers
 	template<typename T>
 	inline void Factory::RegisterPrefab(const std::string& key, std::unique_ptr<T> instance)
 	{
-		m_registry[key] = std::make_unique<CreatorPrefab<T>>(std::move(instance));
+		m_registry[key] = std::make_unique<PrefabCreator<T>>(std::move(instance));
 	}
 
 	template<typename T>
@@ -82,6 +88,8 @@ namespace Skyers
 		{
 			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->Create().release()));
 		}
+
+		LOG("Error could not find Key %s", key.c_str());
 
 		return std::unique_ptr<T>();
 	}

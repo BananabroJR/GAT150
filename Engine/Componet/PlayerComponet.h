@@ -9,6 +9,7 @@ namespace Skyers
 	{
 	public:
 		PlayerComponent() = default;
+		CLASS_DECLARATION(PlayerComponent)
 
 		void Initialize() override;
 		void Update() override;

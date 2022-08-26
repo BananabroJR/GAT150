@@ -21,7 +21,10 @@ namespace Skyers
 	public:
 		Scene() = default;
 		Scene(Game* game) : m_game { game} {}
+		Scene(const Scene& other) {}
 		~Scene() = default;
+		
+		CLASS_DECLARATION(Scene)
 
 		void Update() override;
 		void Initialize() override;

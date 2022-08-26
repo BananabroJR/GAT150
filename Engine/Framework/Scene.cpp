@@ -77,7 +77,21 @@ namespace Skyers
 			{
 				// read actor
 				actor->Read(actorValue);
-				Add(std::move(actor));
+
+				bool prefab = false;
+				READ_DATA(actorValue, prefab);
+
+				if (prefab)
+				{
+					std::string name = actor->GetName();
+					Factory::Instance().RegisterPrefab(name, std::move(actor));
+				}
+				else
+				{
+					Add(std::move(actor));
+
+				}
+
 			}
 			
 		}

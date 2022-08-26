@@ -5,6 +5,23 @@
 
 namespace Skyers
 {
+	Actor::Actor(const Actor& other)
+	{
+		name = other.name;
+		tag = other.tag;
+
+		m_scene = other.m_scene;
+
+		for (auto& componenet : other.m_components)
+		{
+
+
+
+			auto clone = std::unique_ptr<Component>((Component*)componenet->Clone().release());
+			AddComponent(std::move(clone));
+		}
+	}
+
 	void Actor::Initialize()
 	{
 		for (auto& component : m_components)
@@ -19,6 +36,8 @@ namespace Skyers
 
 	void Actor::Update() 
 	{
+		if (!active) return;
+
 		for (auto& component : m_components)
 		{
 			component->Update();
@@ -32,6 +51,7 @@ namespace Skyers
 	}
 
 	void Actor::Draw(Renderer& renderer) {
+		if (!active) return;
 		for (auto& component : m_components)
 		{
 			auto renderComponent = dynamic_cast<RenderComponent*>(component.get());
@@ -67,6 +87,7 @@ namespace Skyers
 	bool Actor::Read(const rapidjson::Value& value) {
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
+		READ_DATA(value, active);
 
 		if (value.HasMember("transform")) m_transform.Read(value["transform"]);
 

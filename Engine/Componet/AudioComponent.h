@@ -10,6 +10,7 @@ namespace Skyers
 		AudioComponent() = default;
 		~AudioComponent();
 
+		CLASS_DECLARATION(AudioComponent)
 
 		void Initialize() override;	
 		void Update() override;

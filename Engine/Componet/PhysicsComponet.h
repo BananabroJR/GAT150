@@ -8,7 +8,7 @@ namespace Skyers
 	{
 	public:
 		PhysicsComponent() = default;
-
+		CLASS_DECLARATION(PhysicsComponent)
 
 		Vector2 velocity;
 		Vector2 acceloration;

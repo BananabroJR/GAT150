@@ -9,6 +9,7 @@ namespace Skyers
 	class SpriteAnimComponent : public RenderComponent
 	{
 	public:
+		CLASS_DECLARATION(SpriteAnimComponent)
 
 		// Inherited via RenderComponent
 		virtual void Update() override;

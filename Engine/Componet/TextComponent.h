@@ -12,6 +12,7 @@ namespace Skyers
 	class TextrueComponent : public RenderComponent
 	{
 	public:
+		CLASS_DECLARATION(TextrueComponent)
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;

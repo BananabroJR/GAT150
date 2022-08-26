@@ -15,10 +15,12 @@ namespace Skyers
 
 	public:
 		Actor() = default;
+		Actor(const Actor& other);
 		Actor(const Transform& transform) : m_transform{ transform } {}
 
-		std::unique_ptr<GameObject> Clone() { return std::make_unique<Actor>(); }
+		CLASS_DECLARATION(Actor)
 
+		
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
@@ -42,6 +44,11 @@ namespace Skyers
 		const std::string& GetName() { return name; }
 		void SetName(const std::string& name) { this->name = name; }
 
+		void SetDestroy() { m_destroy = true; }
+		
+		void SetActive(bool active = true) { this->active = active; }
+		bool IsActive() { return active; }
+
 		friend class Scene;
 		friend class Component;
 
@@ -51,11 +58,11 @@ namespace Skyers
 		std::string tag;
 
 		bool m_destroy = false;
-		
+		bool active = true;
 
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;
-
+ 
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;
 

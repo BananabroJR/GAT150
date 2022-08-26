@@ -9,6 +9,7 @@ namespace Skyers
 	public:
 		RBPhysicsComponent() = default;
 		~RBPhysicsComponent();
+		CLASS_DECLARATION(RBPhysicsComponent)
 
 		void Initialize() override;
 		void Update() override;
