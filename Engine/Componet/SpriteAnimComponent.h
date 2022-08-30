@@ -23,9 +23,10 @@ namespace Skyers
 
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		Rect& GetSource() override;
 
 		float fps = 0;
-		int num_culumns = 0;
+		int num_columns = 0;
 		int num_rows = 0;
 
 		int start_frame = 0;

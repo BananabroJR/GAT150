@@ -1,11 +1,12 @@
 #pragma once
 #include "Framework/Component.h"
 #include "Physics/Collision.h"
+#include "CharacterComponent.h"
 
 
 namespace Skyers
 {
-	class PlayerComponent : public Component, public ICollision
+	class PlayerComponent : public CharacterComponent
 	{
 	public:
 		PlayerComponent() = default;
@@ -19,11 +20,15 @@ namespace Skyers
 		virtual void OnCollisionExit(Actor* other) override;
 		
 
+		// Inherited via CharacterComponent
+		virtual void OnNotify(const Event& event) override;
+
 		// Inherited via Component
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		float speed = 0;
+		float jump = 3000;
+
 
 	};
 }

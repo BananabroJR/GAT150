@@ -5,6 +5,7 @@
 #include "Core/Memory.h"
 #include "Core/File.h"
 #include "Core/Time.h"
+#include "Core/Logger.h"
 
 #include "Math/MathUtils.h"
 #include "Math/Random.h"
@@ -14,6 +15,7 @@
 #include "Framework/Singleton.h"
 #include "Framework/Factory.h"
 #include "Framework/Actor.h"
+#include "Framework/EventManager.h"
 
 #include "Recource/ResourceManager.h"
 
@@ -38,9 +40,14 @@
 #include "Componet/RBPhysicsComponent.h"
 #include "Componet/CollisionComponenet.h"
 #include "Componet/TextComponent.h"
+#include "Componet/TilemapComponent.h"
+#include "Componet/CharacterComponent.h"
 
 
 #include <memory>
+#include<vector>
+#include <list>
+#include <variant>
 
 
 namespace Skyers
@@ -51,7 +58,7 @@ namespace Skyers
 	extern Time g_time;
 	extern ResourceManager g_resource;
 	extern PhysicsSystem g_physics;
-
+	extern EventManager g_event;
 	class Engine : public Singleton<Engine>
 	{
 	public:

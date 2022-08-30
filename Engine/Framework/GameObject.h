@@ -5,7 +5,7 @@
 #define CLASS_DECLARATION(class) \
 std::unique_ptr<GameObject> Clone() { return std::make_unique<class>(*this); } //this is part of CLASS_DECLARATION
 
-#define REGISTER_CLASS(class) Factory::Instance().Register<class>(#class)
+#define REGISTER_CLASS(class) Skyers::Factory::Instance().Register<class>(#class)
 
 namespace Skyers
 {

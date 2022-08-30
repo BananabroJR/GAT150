@@ -1,6 +1,7 @@
 #include "SpriteAnimComponent.h"
 #include "Renderer/Renderer.h"
 #include "Framework/Actor.h"
+#include "TilemapComponent.h"
 #include "Engine.h"
 
 namespace Skyers
@@ -18,10 +19,10 @@ namespace Skyers
             }
         }
 
-        Vector2 cellSize = m_texture->GetSize() / Vector2{ num_culumns, num_rows };
+        Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
 
-        int column = (frame - 1) % num_culumns;
-        int row = (frame - 1) / num_culumns;
+        int column = (frame - 1) % num_columns;
+        int row = (frame - 1) / num_columns;
 
         source.x = (int)(column * cellSize.x);
         source.y = (int)(row * cellSize.y);
@@ -31,7 +32,7 @@ namespace Skyers
 
     void SpriteAnimComponent::Draw(Renderer& renderer)
     {
-        renderer.Draw(m_texture, source, m_owner->m_transform);
+        renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
     }
 
     bool SpriteAnimComponent::Write(const rapidjson::Value& value) const
@@ -47,12 +48,28 @@ namespace Skyers
         m_texture = g_resource.Get<Texture>(texture_name, g_renderer);
 
         READ_DATA(value, fps);
-        READ_DATA(value, num_culumns);
+        READ_DATA(value, num_columns);
         READ_DATA(value, num_rows);
         READ_DATA(value, start_frame);
         READ_DATA(value, end_frame);
 
         return true;
+    }
+
+    Rect& SpriteAnimComponent::GetSource()
+    {
+        // calculate source rect 
+        Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
+
+        int column = (frame - 1) % num_columns;
+        int row = (frame - 1) / num_columns;
+
+        source.x = (int)(column * cellSize.x);
+        source.y = (int)(row * cellSize.y);
+        source.w = (int)(cellSize.x);
+        source.h = (int)(cellSize.y);
+
+        return source;
     }
 
 }

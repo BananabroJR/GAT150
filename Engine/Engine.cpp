@@ -8,6 +8,7 @@ namespace Skyers
 	AudioSystem g_audio;
 	ResourceManager g_resource;
 	PhysicsSystem g_physics;
+	EventManager g_event;
 
 	void Engine::Register()
 	{
@@ -21,6 +22,7 @@ namespace Skyers
 		REGISTER_CLASS(SpriteComponent);
 		REGISTER_CLASS(SpriteAnimComponent);
 		REGISTER_CLASS(TextrueComponent);
+		REGISTER_CLASS(TilemapComponent);
 		Factory::Instance().Register<Actor>("Actor");
 	}
 }

@@ -5,8 +5,8 @@
          "name":"Background",
          "transform":{
             "position":[
-               400,
-               300
+               0,
+               0
             ],
             "scale":[
                1,
@@ -18,31 +18,6 @@
             {
                "type":"SpriteComponent",
                "texture_name":"Sprites/background.png"
-            }
-         ]
-      },
-      {
-         "type":"Actor",
-         "name":"Floor",
-         "transform":{
-            "position":[
-               400,
-               540
-            ],
-            "scale":[
-               1,
-               1
-            ],
-            "rotation":0
-         },
-         "components":[
-            {
-               "type":"RBPhysicsComponent",
-               "data.is_dynamic":false
-            },
-            {
-               "type":"CollisionComponent",
-               "data.size": [800, 24]
             }
          ]
       },
@@ -143,7 +118,7 @@
          "components":[
             {
                "type":"TextComponent",
-               "text":"NEUMONT COLLEGE",
+               "text":"SkyersMONT COLLEGE",
                "font_name":"Fonts/Cat.ttf",
                "font_size":16,
                "registration": [0.0, 0.5],

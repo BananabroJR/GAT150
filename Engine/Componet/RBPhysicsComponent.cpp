@@ -22,7 +22,9 @@ namespace Skyers
     {
         Vector2 posistion = B2VEC2_TO_VECTOR2(m_body->GetPosition());
         m_owner->m_transform.position = PhysicsSystem::WorldToScreen(posistion);
-        m_owner->m_transform.rotation = m_body->GetAngle();
+        m_owner->m_transform.rotation = math::RadToDeg(m_body->GetAngle());
+
+        velocity = B2VEC2_TO_VECTOR2(m_body->GetLinearVelocity());
     }
 
     void RBPhysicsComponent::ApplyForce(Vector2& force)

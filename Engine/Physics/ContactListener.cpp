@@ -10,10 +10,14 @@ namespace Skyers
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
+
+
 		if (fixtureA->GetUserData().pointer && fixtureB->GetUserData().pointer)
 		{
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
+
+			if (actorA->IsDestroy() || actorB->IsDestroy()) return;
 
 			if (actorA->GetComponent<CollisionComponent>())
 			{
@@ -35,6 +39,8 @@ namespace Skyers
 		{
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
+
+			if (actorA->IsDestroy() || actorB->IsDestroy()) return;
 
 			if (actorA->GetComponent<CollisionComponent>())
 			{

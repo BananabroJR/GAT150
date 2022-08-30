@@ -45,9 +45,12 @@ namespace Skyers
 		void SetName(const std::string& name) { this->name = name; }
 
 		void SetDestroy() { m_destroy = true; }
+		bool IsDestroy() { return m_destroy; }
 		
 		void SetActive(bool active = true) { this->active = active; }
 		bool IsActive() { return active; }
+
+		Scene* GetScene() { return m_scene; }
 
 		friend class Scene;
 		friend class Component;
