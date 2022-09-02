@@ -9,6 +9,7 @@ void EnemyComponent::Initialize()
 
 void EnemyComponent::Update()
 {
+   
     auto actor = m_owner->GetScene()->GetActorFromName("Player");
     if (actor)
     {
@@ -30,6 +31,7 @@ void EnemyComponent::OnCollisionEnter(Skyers::Actor* other)
         event.data = damage;
         event.receiver = other;
 
+       
         Skyers::g_event.Notify(event);
     }
 }

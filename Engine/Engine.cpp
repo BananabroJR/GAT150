@@ -21,8 +21,9 @@ namespace Skyers
 		REGISTER_CLASS(PlayerComponent);
 		REGISTER_CLASS(SpriteComponent);
 		REGISTER_CLASS(SpriteAnimComponent);
-		REGISTER_CLASS(TextrueComponent);
+		REGISTER_CLASS(TextComponent);
 		REGISTER_CLASS(TilemapComponent);
+		REGISTER_CLASS(CameraComponent);
 		Factory::Instance().Register<Actor>("Actor");
 	}
 }

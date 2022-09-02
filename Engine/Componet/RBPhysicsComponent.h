@@ -13,7 +13,7 @@ namespace Skyers
 
 		void Initialize() override;
 		void Update() override;
-		virtual void ApplyForce(Vector2& force);
+		virtual void ApplyForce(const Vector2& force) override;
 
 		// Inherited via Component
 		virtual bool Write(const rapidjson::Value& value) const override;

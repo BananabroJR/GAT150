@@ -27,7 +27,7 @@ namespace Skyers
         velocity = B2VEC2_TO_VECTOR2(m_body->GetLinearVelocity());
     }
 
-    void RBPhysicsComponent::ApplyForce(Vector2& force)
+    void RBPhysicsComponent::ApplyForce(const Vector2& force)
     {
         m_body->ApplyForceToCenter(VECTOR2_TO_B2VEC2(force), true);
     }

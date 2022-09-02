@@ -20,7 +20,7 @@
             {
                "type":"RBPhysicsComponent",
                "damping":0.4,
-               "data.gravity_scale":1,
+               "data.gravity_scale":0,
                "data.constrain_angle":true
             },
             {
@@ -29,15 +29,128 @@
             },
             {
                "type":"SpriteAnimComponent",
-               "texture_name":"Sprites/coin.png",
-               "fps":12,
-               "num_columns":8,
-               "num_rows":1,
-               "start_frame":1,
-               "end_frame":8
+               "default_sequence":"idle",
+               "sequences":[
+                  {
+                     "sequence.name":"idle",
+                     "sequence.fps":12,
+                     "sequence.num_columns":8,
+                     "sequence.num_rows":1,
+                     "sequence.start_frame":1,
+                     "sequence.end_frame":8,
+                     "texture_name":"Sprites/coin.png"
+                  }
+               ]
             }
          ]
       },
+      {
+         "type":"Actor",
+         "name":"Bat",
+         "tag":"Enemy",
+         "prefab":true,
+         "transform":{
+            "position":[
+               600,
+               200
+            ],
+            "scale":[
+               1,
+               1
+            ],
+            "rotation":0
+         },
+         "components":[
+         {
+               "type":"NeutralComponent",
+               "speed":20
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "damping":0.4,
+               "data.gravity_scale":0,
+               "data.constrain_angle":true
+            },
+            {
+               "type":"CollisionComponent",
+               "data.restitution":0.7
+            },
+            {
+               "type":"SpriteAnimComponent",
+               "default_sequence":"idle",
+               "sequences":[
+                  {
+                     "sequence.name":"idle",
+                     "sequence.fps":12,
+                     "sequence.num_columns":4,
+                     "sequence.num_rows":1,
+                     "sequence.start_frame":1,
+                     "sequence.end_frame":4,
+                     "texture_name":"Sprites/Bat.png"
+                  }
+               ]
+            }
+         ]
+      },
+          {
+         "type":"Actor",
+         "name":"Player",
+         "tag":"Player",
+         "prefab":true,
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "scale":[
+               1,
+               1
+            ],
+            "rotation":0
+         },
+          
+         "components":[
+            {
+               "type":"PlayerComponent",
+               "speed":30,
+               "jump":500
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "damping":0.1,
+               "data.gravity_scale":1,
+               "data.constrain_angle":true
+            },
+            {
+               "type":"CollisionComponent"
+            },
+            {
+               "type":"SpriteAnimComponent", 
+     "default_sequence":"idle", 
+     "sequences":[ 
+         { 
+             "sequence.name":"run", 
+             "sequence.fps":12, 
+             "sequence.num_columns":12, 
+             "sequence.num_rows":1, 
+             "sequence.start_frame":1, 
+             "sequence.end_frame":12, 
+             "texture_name":"Sprites/gothic-hero-run.png" 
+         }, 
+         { 
+             "sequence.name":"idle", 
+             "sequence.fps":12, 
+             "sequence.num_columns":4, 
+             "sequence.num_rows":1, 
+             "sequence.start_frame":1, 
+             "sequence.end_frame":4, 
+             "texture_name":"Sprites/gothic-hero-idle.png" 
+         } 
+     ] 
+            }
+         ]
+      },
+        
       {
          "type":"Actor",
          "name":"Ghost",
@@ -56,7 +169,8 @@
          },
          "components":[
             {
-                "type" : "EnemyComponent",
+               "type":"EnemyComponent",
+               "speed":20
             },
             {
                "type":"RBPhysicsComponent",
@@ -67,16 +181,21 @@
             {
                "type":"CollisionComponent",
                "data.restitution":0.7
-               
             },
             {
                "type":"SpriteAnimComponent",
-               "texture_name":"Sprites/ghost-idle.png",
-               "fps":12,
-               "num_columns":7,
-               "num_rows":1,
-               "start_frame":1,
-               "end_frame":8
+               "default_sequence":"idle",
+               "sequences":[
+                  {
+                     "sequence.name":"idle",
+                     "sequence.fps":12,
+                     "sequence.num_columns":7,
+                     "sequence.num_rows":1,
+                     "sequence.start_frame":1,
+                     "sequence.end_frame":7,
+                     "texture_name":"Sprites/ghost-idle.png"
+                  }
+               ]
             }
          ]
       }

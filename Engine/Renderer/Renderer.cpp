@@ -13,6 +13,9 @@ namespace Skyers
 		SDL_Init(SDL_INIT_VIDEO);
 		TTF_Init();
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+
+		m_view = Matrix3x3::identity; 
+		m_viewport = Matrix3x3::identity; 
 	}
 
 	void Renderer::Shutdown()
@@ -23,12 +26,14 @@ namespace Skyers
 		IMG_Quit();
 	}
 
-	void Renderer::CreateWindow(const char* name, int width, int height)
+	void Renderer::CreateWindow(const char* name, int width, int height,bool fullscreen)
 	{
 		m_width = width;
 		m_height = height;
 
-		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		int flags = (fullscreen) ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+
+		m_window = SDL_CreateWindow(name, 100, 100, width, height, flags);
 		m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 	}
 
@@ -69,6 +74,8 @@ namespace Skyers
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle, const Vector2& scale, const Vector2& registration)
 	{
+	
+
 		Vector2 size = texture->GetSize();
 		size = size * scale;
 
@@ -109,18 +116,19 @@ namespace Skyers
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration,bool flipH)
 	{
-		Vector2 size = Vector2{source.w,source.h};
-		size = size * transform.scale;
+		Matrix3x3 mx = m_viewport * m_view * transform.matrix;
+
+		Vector2 size = Vector2{ source.w, source.h };
+		size = size * mx.GetScale();
 
 		Vector2 origin = size * registration;
-		Vector2 t_position = transform.position - origin;
+		Vector2 tposition = mx.GetTranslation() - origin;
 
 		SDL_Rect dest;
-
-		dest.x = (int)transform.position.x;
-		dest.y = (int)transform.position.y;
-		dest.w = (int)size.x;
-		dest.h = (int)size.y;
+		dest.x = (int)(tposition.x);
+		dest.y = (int)(tposition.y);
+		dest.w = (int)(size.x);
+		dest.h = (int)(size.y);
 
 		SDL_Rect src;
 		src.x = source.x;
@@ -128,7 +136,7 @@ namespace Skyers
 		src.w = source.w;
 		src.h = source.h;
 
-		SDL_Point center{ (int)origin.x,(int)origin.y };
+		SDL_Point center{ (int)origin.x, (int)origin.y };
 
 		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 

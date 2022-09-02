@@ -17,7 +17,7 @@ namespace Skyers
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		float health = 100;
+		float health = 200;
 		float damage = 10;
 		float speed = 0;
 	};

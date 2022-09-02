@@ -9,10 +9,10 @@ namespace Skyers
 	class Font;
 	class Texture;
 
-	class TextrueComponent : public RenderComponent
+	class TextComponent : public RenderComponent
 	{
 	public:
-		CLASS_DECLARATION(TextrueComponent)
+		CLASS_DECLARATION(TextComponent)
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
@@ -29,6 +29,7 @@ namespace Skyers
 		int fontSize;
 		Vector2 registration;
 		Color color;
+		bool active;
 
 
 		std::shared_ptr<Font> m_font;

@@ -28,6 +28,8 @@ namespace Skyers
 		virtual bool Read(const rapidjson::Value& value) override;
 
 		float jump = 3000;
+		int m_groundCount = 0;
+		bool isProjectile = false;
 
 
 	};

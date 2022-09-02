@@ -19,7 +19,7 @@ int main()
 	Skyers::g_event.Initialize();
 	Skyers::Engine::Instance().Register();
 
-	Skyers::g_renderer.CreateWindow("Skyersmont", 800, 600);
+	Skyers::g_renderer.CreateWindow("Neumont", 800, 600, true);
 	Skyers::g_renderer.SetClearColor(Skyers::Color{ 0, 0, 0, 255 });
 
 	//create game
@@ -37,9 +37,11 @@ int main()
 		Skyers::g_audio.Update();
 		Skyers::g_event.Update();
 
+
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 
 		Skyers::g_physics.Update();
+		
 		game->Update();
 
 		Skyers::g_renderer.BeginFrame();

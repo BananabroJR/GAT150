@@ -23,7 +23,7 @@ namespace Skyers
 
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		Rect source;
+	public:
 		std::shared_ptr<Texture> m_texture;
 
 	};

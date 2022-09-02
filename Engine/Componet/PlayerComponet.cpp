@@ -1,6 +1,7 @@
 #include "PlayerComponet.h"
 #include "Framework/Actor.h"
 #include "Engine.h"
+#include "Framework/Scene.h"
 #include <iostream>
 
 namespace Skyers
@@ -25,6 +26,13 @@ namespace Skyers
 			//direction = Vector2::right;
 		}
 	
+		auto camera = m_owner->GetScene()->GetActorFromName("Camera");
+		if (camera)
+		{
+			//camera->m_transform.position = m_owner->m_transform.position;
+			camera->m_transform.position = math::Lerp(camera->m_transform.position, m_owner->m_transform.position, 2 * g_time.deltaTime); 
+		}
+
 		Vector2 veloctiy;
 		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component)
@@ -34,22 +42,32 @@ namespace Skyers
 		
 		}
 	
-		if (g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
+		if (m_groundCount > 0 && g_inputSystem.GetKeyState(key_space) == InputSystem::KeyState::Pressed)
 		{
 			auto component = m_owner->GetComponent<PhysicsComponent>();
 			if (component)
 			{
 
-				component->ApplyForce(Vector2::up * 30);
+				component->ApplyForce(Vector2::up * jump);
 
 
 			}
 		}
 
-		auto renderComponent = m_owner->GetComponent<RenderComponent>();
-		if (renderComponent)
+ 		
+
+		auto animComponent = m_owner->GetComponent<SpriteAnimComponent>();
+		if (animComponent)
 		{
-			if (veloctiy.x != 0) renderComponent->SetFlipHorizontal(veloctiy.x < 0);
+			if (veloctiy.x != 0) animComponent->SetFlipHorizontal(veloctiy.x < 0);
+			if (std::fabs(veloctiy.x) > 0)
+			{
+				animComponent->SetSequence("run");
+			}
+			else
+			{
+				animComponent->SetSequence("idle");
+			}
 		}
 	}
 
@@ -73,7 +91,8 @@ namespace Skyers
 		if (event.name == "EVENT_DAMAGE")
 		{
 			health -= std::get<float>(event.data);
-			std::cout << health << std::endl;
+			std::cout << "Health" << health << std::endl;
+			std::cout << "Damage" << damage << std::endl;
 			if (health <= 0)
 			{
 				m_owner->SetDestroy();
@@ -88,13 +107,29 @@ namespace Skyers
 
 	void PlayerComponent::OnCollisionEnter(Actor* other)
 	{
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount++;
+		}
+
 		if (other->GetName() == "Coin")
 		{
 			Event event;
 			event.name = "EVENT_ADD_POINTS";
 			event.data = 100;
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			if (component)
+			{
+
+				component->ApplyForce(Vector2::up * jump);
+
+
+			}
+
+			health += 1;
 
 			g_event.Notify(event);
+			Skyers::g_audio.PlayAudio("coin");
 
 			other->SetDestroy();
 		}
@@ -110,12 +145,17 @@ namespace Skyers
 
 			other->SetDestroy();
 		}
+
+
 		
 	}
 
 	void PlayerComponent::OnCollisionExit(Actor* other)
 	{
-		
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount--;
+		}
 	}
 
 }

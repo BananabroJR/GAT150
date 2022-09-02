@@ -152,6 +152,9 @@
     <ClCompile Include="Componet\CharacterComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Componet\CameraComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -302,6 +305,9 @@
       <Filter>Source\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Componet\CharacterComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Componet\CameraComponent.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>

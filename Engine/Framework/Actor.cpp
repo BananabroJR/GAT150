@@ -2,6 +2,7 @@
 #include "Factory.h"
 #include "Core/Logger.h"
 #include "Componet/RenderComponet.h"
+#include "Engine.h"
 
 namespace Skyers
 {
@@ -10,6 +11,7 @@ namespace Skyers
 		name = other.name;
 		tag = other.tag;
 		m_transform = other.m_transform;
+		lifespan = other.lifespan;
 
 		m_scene = other.m_scene;
 
@@ -45,6 +47,16 @@ namespace Skyers
 			child->Update();
 		}
 		if (m_parent) m_transform.Update(m_parent->m_transform.matrix);
+
+		if (lifespan != 0)
+		{
+			lifespan -= g_time.deltaTime;
+			if (lifespan <= 0)
+			{
+				SetDestroy();
+			}
+		}
+
 		else m_transform.Update();
 	}
 
@@ -86,6 +98,7 @@ namespace Skyers
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
 		READ_DATA(value, active);
+		READ_DATA(value, lifespan);
 
 		if (value.HasMember("transform")) m_transform.Read(value["transform"]);
 

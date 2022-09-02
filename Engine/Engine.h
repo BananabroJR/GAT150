@@ -42,6 +42,7 @@
 #include "Componet/TextComponent.h"
 #include "Componet/TilemapComponent.h"
 #include "Componet/CharacterComponent.h"
+#include "Componet/CameraComponent.h"
 
 
 #include <memory>

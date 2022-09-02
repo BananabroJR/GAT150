@@ -13,9 +13,11 @@ namespace Skyers
 		Vector2 velocity;
 		Vector2 acceloration;
 
+	
+
 		float damping = 1;
 		void Update() override;
-		void ApplyForce(const Vector2& force) {acceloration += force; }
+		virtual void ApplyForce(const Vector2& force) {acceloration += force; }
 
 		// Inherited via Component
 		virtual bool Write(const rapidjson::Value& value) const override;

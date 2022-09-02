@@ -27,6 +27,9 @@
     <ClCompile Include="GameComponents\EnemyComponent.cpp">
       <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponents\NeutralComponent.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Scenes\prefabs.txt">
@@ -44,6 +47,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameComponents\EnemyComponent.h">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\NeutralComponent.h">
       <Filter>Source Files\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
